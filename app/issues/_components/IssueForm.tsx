@@ -69,6 +69,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <div>
           <label htmlFor="status" className="block text-sm font-medium mb-2">
             Status
@@ -85,7 +86,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           </select>
           <ErrorMessage>{errors.status?.message}</ErrorMessage>
         </div>
-        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
           {issue ? "Update Issue" : "Submit New Issue"}{" "}
           {isSubmitting && <Spinner />}
