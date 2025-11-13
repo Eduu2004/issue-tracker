@@ -1,5 +1,5 @@
 "use client";
-import { Button, Text, TextField } from "@radix-ui/themes";
+import { Button, Select, Text, TextField } from "@radix-ui/themes";
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
@@ -48,7 +48,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   return (
     <div className="max-w-xl">
       {error && (
-        <Callout.Root color="red" className="mb-5">
+        <Callout.Root color="red" className="mb-4">
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
@@ -70,26 +70,30 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
+        <Controller
+          name="status"
+          control={control}
+          defaultValue={issue?.status || "OPEN"}
+          render={({ field }) => (
+            <Select.Root
+              defaultValue={issue?.status || "OPEN"}
+              onValueChange={field.onChange}
+            >
+              <Select.Trigger />
+              <Select.Content>
+                <Select.Item value="OPEN">Open</Select.Item>
+                <Select.Item value="IN_PROGRESS">In Progress</Select.Item>
+                <Select.Item value="CLOSED">Closed</Select.Item>
+              </Select.Content>
+            </Select.Root>
+          )}
+        />
         <div>
-          <label htmlFor="status" className="block text-sm font-medium mb-2">
-            Status
-          </label>
-          <select
-            id="status"
-            defaultValue={issue?.status || "OPEN"}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            {...register("status")}
-          >
-            <option value="OPEN">Open</option>
-            <option value="IN_PROGRESS">In Progress</option>
-            <option value="CLOSED">Closed</option>
-          </select>
-          <ErrorMessage>{errors.status?.message}</ErrorMessage>
-        </div>
-        <Button disabled={isSubmitting}>
-          {issue ? "Update Issue" : "Submit New Issue"}{" "}
-          {isSubmitting && <Spinner />}
-        </Button>
+          <Button disabled={isSubmitting} className="my-4">
+            {issue ? "Update Issue" : "Submit New Issue"}{" "}
+            {isSubmitting && <Spinner />}
+          </Button>
+        </div>  
       </form>
     </div>
   );
