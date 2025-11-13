@@ -69,6 +69,22 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
+        <div>
+          <label htmlFor="status" className="block text-sm font-medium mb-2">
+            Status
+          </label>
+          <select
+            id="status"
+            defaultValue={issue?.status || "OPEN"}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("status")}
+          >
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="CLOSED">Closed</option>
+          </select>
+          <ErrorMessage>{errors.status?.message}</ErrorMessage>
+        </div>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button disabled={isSubmitting}>
           {issue ? "Update Issue" : "Submit New Issue"}{" "}
