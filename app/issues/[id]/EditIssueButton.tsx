@@ -4,12 +4,11 @@ import { Pencil2Icon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import React from "react";
 
-
-const EditIssueButton =  async ({ issueId }: {issueId: number }) => {
+const EditIssueButton = async ({ issueId }: { issueId: number }) => {
   return (
     <Button>
-        <Pencil2Icon />
-      <Link href={`/issues/${issueId}/edit`}>Edit Issue</Link>
+      <Pencil2Icon />
+      <Link href={`/issues/edit/${issueId}`}>Edit Issue</Link>
     </Button>
   );
 };
