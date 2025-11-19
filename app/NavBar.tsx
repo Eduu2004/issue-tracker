@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoBug } from "react-icons/io5";
+import { Skeleton } from "@/app/components";
 const NavBar = () => {
   return (
     <nav className="border-b mb-5 px-5 py-3">
@@ -58,7 +59,7 @@ const NavLinks = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
 
-  if (status === "loading") return null;
+  if (status === "loading") return <Skeleton width="3remA" />;
 
   if (status === "unauthenticated")
     return (
