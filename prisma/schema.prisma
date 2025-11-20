@@ -66,6 +66,8 @@ model User {
   accounts       Account[]
   sessions       Session[]
   assignedIssues Issue[]
+
+  @@map("user")
 }
 
 model VerificationToken {
