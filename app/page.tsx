@@ -8,7 +8,6 @@ export default function Home({
   return (
     <div>
       Hello World
-      <Pagintaion itemCount={100} pageSize={10} currentPage={parseInt(searchParams.page)} />
     </div>
   );
 }
