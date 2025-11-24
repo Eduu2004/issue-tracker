@@ -4,12 +4,14 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
-  open: number;
-  inProgress: number;
-  closed: number;
+  counts: {
+    open: number;
+    inProgress: number;
+    closed: number;
+  };
 }
 
-const IssueSummary = ({ open, inProgress, closed }: Props) => {
+const IssueSummary = ({ counts: { open, inProgress, closed } }: Props) => {
   const containers: {
     label: string;
     value: number;
@@ -25,10 +27,15 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
       {containers.map((container) => (
         <Card key={container.label}>
           <Flex direction="column" gap="1">
-            <Link className="text-sm font-medium" href={`/issues/list?status=${container.status}`}>
+            <Link
+              className="text-sm font-medium"
+              href={`/issues/list?status=${container.status}`}
+            >
               {container.label}
             </Link>
-            <Text size="5" className="font-bold">{container.value}</Text>
+            <Text size="5" className="font-bold">
+              {container.value}
+            </Text>
           </Flex>
         </Card>
       ))}

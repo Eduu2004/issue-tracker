@@ -4,12 +4,14 @@ import React from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 interface Props {
-  open: number;
-  inProgress: number;
-  closed: number;
+  counts: {
+    open: number;
+    inProgress: number;
+    closed: number;
+  };
 }
 
-const IssueChart = ({ open, inProgress, closed }: Props) => {
+const IssueChart = ({ counts: { open, inProgress, closed } }: Props) => {
   const data = [
     { label: "Open", value: open },
     { label: "In Progress", value: inProgress },
